@@ -15,6 +15,8 @@
 
 # joker-demo-netty-1-00
 
+- 主题：netty案例，netty4.1基础入门篇零《初入JavaIO之门BIO、NIO、AIO实战练习》
+
 在Java中，提供了一些关于使用IO的API，可以供开发者来读写外部数据和文件，我们称这些API为Java IO。IO是Java中比较重要知识点，且比较难学习的知识点。并且随着Java的发展为提供更好的数据传输性能，目前有三种IO共存；分别是BIO、NIO和AIO。
 
 ![image-20230831232825921](https://2021-joker.oss-cn-shanghai.aliyuncs.com/java-img/image-20230831232825921.png)
@@ -110,6 +112,20 @@ buffer中的flip方法涉及到bufer中的Capacity,Position和Limit三个概念�
 
 
 
+# joker-demo-netty-1-01
+
+- 主题：netty案例，netty4.1基础入门篇一《嗨！NettyServer》
+
+- 已测完
+
+
+
+
+
+# joker-demo-netty-1-02
+
+- 主题： netty案例，netty4.1基础入门篇二《NettyServer接收数据》
+- 已测完
 
 
 
@@ -117,6 +133,64 @@ buffer中的flip方法涉及到bufer中的Capacity,Position和Limit三个概念�
 
 
 
+# joker-demo-netty-1-03
+
+- 主题： netty案例，netty4.1基础入门篇三《NettyServer字符串解码器》
+
+
+
+在实际开发中，server端接收数据后我们希望他是一个字符串或者是一个对象类型，而不是字节码，那么；
+
+1. 在netty中是否可以自动的把接收的Bytebuf数据转String，不需要我手动处理？ 答；有，可以在管道中添加一个StringDecoder。
+2. 在网络传输过程中有半包粘包的问题，netty能解决吗？ 答：能，netty提供了很丰富的解码器，在正确合理的使用下就能解决半包粘包问题。
+3. 常用的String字符串下有什么样的解码器呢？ 答：不仅在String下有处理半包粘包的解码器在处理其他的数据格式也有，其中谷歌的protobuf数据格式就是其中一个。对于String的有以下常用的三种：
+   1. LineBasedFrameDecoder 基于换行
+   2. DelimiterBasedFrameDecoder 基于指定字符串
+   3. FixedLengthFrameDecoder 基于字符串长度
+
+
+
+
+
+
+
+# joker-demo-netty-1-04
+
+- 主题：netty案例，netty4.1基础入门篇四《NettyServer收发数据》
+
+本章节主要介绍服务端在收到数据后，通过writeAndFlush发送ByteBuf字节码向客户端传输信息。因为我们使用客户端模拟器的编码是GBK格式，所以代码中也需要将字节码转换为GBK，否则会乱码。
+
+
+
+
+
+
+
+
+
+
+
+# joker-demo-netty-1-05
+
+- 主题：netty案例，netty4.1基础入门篇五《NettyServer字符串编码器》
+
+
+
+netty通信就向一个流水channel管道，我们可以在管道的中间插入一些‘挡板’为我们服务。比如字符串的编码解码，在前面我们使用new StringDecoder(Charset.forName("GBK"))进行字符串解码，这样我们在收取数据就不需要手动处理字节码。那么本章节我们使用与之对应的new StringEncoder(Charset.forName("GBK"))进行进行字符串编码，用以实现服务端在发送数据的时候只需要传输字符串内容即可。
+
+
+
+
+
+
+
+# joker-demo-netty-1-06
+
+- 主题：netty案例，netty4.1基础入门篇六《NettyServer群发消息》
+
+
+
+在微信或者QQ的聊天中我们经常会用到一些群聊，把你的信息发送给所有用户。那么为了实现群发消息，在netty中我们可以使用ChannelGroup方式进行群发消息。如果为了扩展验证比如你实际聊天有不同的群，那么可以定义ConcurrentHashMap结构来存放ChannelGroup。ChannelGroup中提供了一些基础的方法；添加、异常、查找、清空、发放消息、关闭等。
 
 
 

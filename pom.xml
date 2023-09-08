@@ -9,6 +9,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>joker-demo-netty-1-00</module>
+        <module>joker-demo-netty-1-01</module>
+        <module>joker-demo-netty-1-02</module>
+        <module>joker-demo-netty-1-03</module>
+        <module>joker-demo-netty-1-04</module>
+        <module>joker-demo-netty-1-05</module>
+        <module>joker-demo-netty-1-06</module>
     </modules>
     <version>1.0.0-SNAPSHOT</version>
 
