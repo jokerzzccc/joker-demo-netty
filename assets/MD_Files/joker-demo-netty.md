@@ -196,6 +196,98 @@ netty通信就向一个流水channel管道，我们可以在管道的中间插�
 
 
 
+# joker-demo-netty-1-07
+
+- 主题：netty案例，netty4.1基础入门篇七《嗨！NettyClient》
+
+在前六章的案例中使用socket模拟器链接我们的NettyServer，进行通信测试。本章节我们写一个helloworld版的NettyClient客户端，与我们的socket模拟器进行通信。在netty中客户端与服务端的写法基本类似，注意一些细节即可，这也是netty的强大之处，它把nio流与sokcet封装的相当简单易用。
+
+
+
+# joker-demo-netty-1-08
+
+- 主题：netty案例，netty4.1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》
+
+Netty开发中，客户端与服务端需要保持同样的；半包粘包处理，编码解码处理、收发数据方式，这样才能保证数据通信正常。在前面NettyServer的章节中我们也同样处理了；半包粘包、编码解码等，为此在本章节我们可以把这些知识模块开发到NettyClient中。本章节涉及到的知识点有；LineBasedFrameDecoder、StringDecoder、StringEncoder、ChannelInboundHandlerAdapter等。
+
+
+
+
+
+# joker-demo-netty-1-09 - 有问题	
+
+- 主题：netty案例，netty4.1基础入门篇九《自定义编码解码器，处理半包、粘包数据》
+
+
+
+在实际应用场景里，只要是支持sokcet通信的都可以和Netty交互，比如中继器、下位机、PLC等。这些场景下就非常需要自定义编码解码器，来处理字节码传输，并控制半包、粘包以及安全问题。那么本章节我们通过实现ByteToMessageDecoder、MessageToByteEncoder来实现我们的需求。
+
+> 数据传输过程中有各种情况；整包数据、半包数据、粘包数据，比如我们设定开始符号02、结束符号03； 整包数据；02 89 78 54 03 半包数据；02 89 78 粘包数据；02 89 78 54 03 02 89
+
+
+
+测试的时候出问题了：
+
+- 服务端收到数据直接 return 了
+
+
+
+
+
+
+
+# joker-demo-netty-1-10
+
+- 主题：netty案例，netty4.1基础入门篇十《关于ChannelOutboundHandlerAdapter简单使用》
+
+
+
+ChannelOutboundHandlerAdapter与ChannelInboundHandlerAdapter都是继承于ChannelHandler，并实现自己的ChannelXxxHandler。用于在消息管道中不同时机下处理处理消息。
+
+
+
+> ChannelInboundHandler拦截和处理入站事件，ChannelOutboundHandler拦截和处理出站事件。ChannelHandler和ChannelHandlerContext通过组合或继承的方式关联到一起成对使用。事件通过ChannelHandlerContext主动调用如read(msg)、write(msg)和fireXXX()等方法，将事件传播到下一个处理器。注意：入站事件在ChannelPipeline双向链表中由头到尾正向传播，出站事件则方向相反。 当客户端连接到服务器时，Netty新建一个ChannelPipeline处理其中的事件，而一个ChannelPipeline中含有若干ChannelHandler。如果每个客户端连接都新建一个ChannelHandler实例，当有大量客户端时，服务器将保存大量的ChannelHandler实例。为此，Netty提供了Sharable注解，如果一个ChannelHandler状态无关，那么可将其标注为Sharable，如此，服务器只需保存一个实例就能处理所有客户端的事件。
+
+------
+
+ChannelHandler类图 
+
+![ChannelHandler类图](https://bugstack.cn/assets/images/pic-content/2019/08/ChannelHandler%E7%B1%BB%E5%9B%BE.png)
+
+
+
+
+
+# joker-demo-netty-1-11
+
+- 主题：netty案例，netty4.1基础入门篇十一《netty udp通信方式案例Demo》
+
+在Netty通信中UDP的实现方式也非常简单，只要注意部分代码区别于TCP即可。本章节需要注意的知识点 ；NioDatagramChannel、ChannelOption.SO_BROADCAST
+
+> Internet 协议集支持一个无连接的传输协议，该协议称为用户数据报协议（UDP，User Datagram Protocol）。UDP 为应用程序提供了一种无需建立连接就可以发送封装的 IP 数据报的方法。RFC 768 [1] 描述了 UDP。 Internet 的传输层有两个主要协议，互为补充。无连接的是 UDP，它除了给应用程序发送数据包功能并允许它们在所需的层次上架构自己的协议之外，几乎没有做什么特别的的事情。面向连接的是 TCP，该协议几乎做了所有的事情。
+
+
+
+
+
+
+
+# joker-demo-netty-1-12
+
+- 主题： netty案例，netty4.1基础入门篇十二《简单实现一个基于Netty搭建的Http服务》
+
+
+
+Netty不仅可以搭建Socket服务，也可以搭建Http、Https服务。本章节我们通过一个简单的入门案例，来了解Netty搭建的Http服务，在我们后续的Netty网关服务中会使用到这样的功能点。
+
+超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。
+
+> 在后端开发中接触HTTP协议的比较多，目前大部分都是基于Servlet容器实现的Http服务，往往有一些核心子系统对性能的要求非常高，这个时候我们可以考虑采用NIO的网络模型来实现HTTP服务，以此提高性能和吞吐量，Netty除了开发网络应用非常方便，还内置了HTTP相关的编解码器，让用户可以很方便的开发出高性能的HTTP协议的服务，Spring Webflux默认是使用的Netty。
+
+
+
+
+
 
 
 
