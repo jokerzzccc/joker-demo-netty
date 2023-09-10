@@ -13,6 +13,8 @@
 
 
 
+# ==入门篇==
+
 # joker-demo-netty-1-00
 
 - 主题：netty案例，netty4.1基础入门篇零《初入JavaIO之门BIO、NIO、AIO实战练习》
@@ -283,6 +285,50 @@ Netty不仅可以搭建Socket服务，也可以搭建Http、Https服务。本章
 超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。
 
 > 在后端开发中接触HTTP协议的比较多，目前大部分都是基于Servlet容器实现的Http服务，往往有一些核心子系统对性能的要求非常高，这个时候我们可以考虑采用NIO的网络模型来实现HTTP服务，以此提高性能和吞吐量，Netty除了开发网络应用非常方便，还内置了HTTP相关的编解码器，让用户可以很方便的开发出高性能的HTTP协议的服务，Spring Webflux默认是使用的Netty。
+
+
+
+
+
+# ==中级拓展篇==
+
+# itstack-demo-netty-2-01
+
+- 主题：netty案例，netty4.1中级拓展篇一《Netty与SpringBoot整合》
+
+在实际的开发中，我们需要对netty服务进行更多的操作，包括；获取它的状态信息、启动/停止、对客户端用户强制下线等等，为此我们需要把netty服务加入到web系统中，那么本章节介绍如何将Netty与SpringBoot整合。
+
+> Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式，Spring Boot致力于在蓬勃发展的快速应用开发领域(rapid application development)成为领导者。
+
+
+
+
+
+
+
+## 测试
+
+1. 启动SpringBoot *NettyApplication.main >run (即 NettyServer)
+2. 启动ApiTest （即 NettyClient）
+3. Web访问 *http://localhost:8080/nettyserver/localAddress
+4. Web访问 *http://localhost:8080/nettyserver/isOpen
+5. 观察结果
+
+
+
+
+
+# itstack-demo-netty-2-02
+
+- 主题： netty案例，netty4.1中级拓展篇二《Netty使用Protobuf传输数据》
+
+
+
+
+
+
+
+
 
 
 

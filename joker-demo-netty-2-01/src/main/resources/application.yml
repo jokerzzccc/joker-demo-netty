@@ -1,0 +1,6 @@
+server:
+  port:8080
+
+netty:
+  host: 192.168.31.107
+  port: 7397
